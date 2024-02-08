@@ -88,13 +88,13 @@ const convertVideoToImages = async (everyXSeconds: number) => {
               return {
                 [seatNumber]: res.isOccupied,
               };
-            }, 3), // Limit concurrency to 1 for sequential processing
+            }, 4), // Limit concurrency to 1 for sequential processing
             reduce((acc, value) => ({ ...acc, ...value }), {}),
             map((result) => {
               return { [frameIndex * everyXSeconds]: result };
             })
           ),
-        3
+        2
       ),
       reduce((acc, value) => ({ ...acc, ...value }), {}),
       tap((results) => {
@@ -111,4 +111,4 @@ const convertVideoToImages = async (everyXSeconds: number) => {
     });
 };
 
-convertVideoToImages(3);
+convertVideoToImages(10);
